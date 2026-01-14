@@ -123,8 +123,8 @@ Visit http://localhost:3000
 Create project structure (requires manual file copying):
 
 ```bash
-npx create-hashtagcms-app my-project
-cd my-project
+npx @hashtagcms/create-hashtagcms-app my-awesome-site
+cd my-awesome-site
 
 # Then copy source files from the repository
 # See installation guide for details
@@ -139,15 +139,18 @@ nodejs-frontend/
 ├── config/                 # Configuration files
 │   └── hashtagcms.js      # HashtagCMS-specific config
 ├── docs/                  # Documentation
-├── locales/               # Translation files
-│   └── en/
-│       └── hashtagcms/
 ├── public/                # Static assets (compiled)
 │   └── assets/
 ├── resources/             # Source assets
 │   └── assets/
 │       └── fe/
 │           └── basic/     # Default theme assets
+├── lang/               # Translation files
+│   └── en/
+│       └── hashtagcms/
+├── views/                # EJS templates
+│   └── fe/
+│       └── basic/        # Default theme views
 ├── src/                   # Application source code
 │   ├── controllers/       # Request handlers
 │   ├── core/             # Core framework classes
@@ -155,9 +158,6 @@ nodejs-frontend/
 │   ├── routes/           # Route definitions
 │   ├── services/         # External service integrations
 │   └── utils/            # Utility functions
-├── views/                # EJS templates
-│   └── fe/
-│       └── basic/        # Default theme views
 ├── .env                  # Environment configuration
 ├── package.json          # Dependencies and scripts
 ├── server.js            # Application entry point

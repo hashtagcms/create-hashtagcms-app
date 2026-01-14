@@ -246,15 +246,18 @@ my-awesome-site/
 ├── config/              # Configuration files
 │   └── hashtagcms.js   # CMS configuration
 ├── docs/                # Comprehensive documentation
-├── locales/             # Translation files
-│   ├── en/             # English translations
-│   └── hi/             # Hindi translations
 ├── public/              # Static assets
 │   └── assets/
 ├── resources/           # Source assets
 │   └── assets/
 │       └── fe/
 │           └── basic/   # Theme assets
+├── lang/             # Translation files
+│   ├── en/             # English translations
+│   └── hi/             # Hindi translations
+├── views/              # EJS templates
+│   └── fe/
+│       └── basic/      # Theme templates
 ├── src/
 │   ├── controllers/     # Request handlers
 │   ├── core/           # Core classes
@@ -271,9 +274,6 @@ my-awesome-site/
 │       ├── Logger.js
 │       ├── InfoLoaderPool.js
 │       └── RedisCacheManager.js
-├── views/              # EJS templates
-│   └── fe/
-│       └── basic/      # Theme templates
 ├── .env                # Environment config
 ├── server.js           # Application entry
 └── package.json        # Dependencies
