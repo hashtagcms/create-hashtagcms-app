@@ -107,3 +107,5 @@ dist
 # Stores VSCode settings outside the .vscode directory
 .vs/
 summaries/
+
+.DS_Store
