@@ -54,8 +54,17 @@ ${colors.bright}Options:${colors.reset}
   --version, -v      Show version number
 
 ${colors.bright}Examples:${colors.reset}
-  ${colors.cyan}npx create-hashtagcms-app${colors.reset} ${colors.green}my-project${colors.reset}
-  ${colors.cyan}npx create-hashtagcms-app${colors.reset} ${colors.green}my-blog${colors.reset} ${colors.yellow}--template basic${colors.reset}
+  ${colors.green}npx @hashtagcms/create-hashtagcms-app${colors.reset} ${colors.cyan}<project-name>${colors.reset} [options]
+  
+Options:
+  --context <context>      Site context (e.g., web, mobile)
+  --api-base-url <url>     CMS API Base URL
+  --api-secret <secret>    CMS API Secret (optional)
+  --help                   Show this help message
+
+Example:
+  ${colors.cyan}npx @hashtagcms/create-hashtagcms-app${colors.reset} ${colors.green}my-blog${colors.reset} ${colors.yellow}--template basic${colors.reset}
+
 
 ${colors.bright}Learn more:${colors.reset}
   https://github.com/hashtagcms/create-hashtagcms-app

@@ -1,5 +1,5 @@
 {
-    "name": "create-hashtagcms-app",
+    "name": "@hashtagcms/create-hashtagcms-app",
     "version": "1.0.0",
     "description": "The official standalone Node.js frontend application for HashtagCMS.",
     "main": "server.js",
@@ -49,6 +49,9 @@
     ],
     "author": "HashtagCMS <info@hashtagcms.org>",
     "license": "MIT",
+    "publishConfig": {
+        "access": "public"
+    },
     "engines": {
         "node": ">=14.0.0",
         "npm": ">=6.0.0"

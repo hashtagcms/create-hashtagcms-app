@@ -66,7 +66,7 @@ You need a running HashtagCMS backend instance with API access. Ensure you have:
 Create project structure quickly:
 
 ```bash
-npx create-hashtagcms-app my-project
+npx @hashtagcms/create-hashtagcms-app my-project
 cd my-project
 ```
 

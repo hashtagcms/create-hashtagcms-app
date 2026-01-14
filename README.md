@@ -193,7 +193,7 @@ Before you begin, ensure you have:
 ### **Option 1: NPX (Fastest)**
 
 ```bash
-npx create-hashtagcms-app my-awesome-site
+npx @hashtagcms/create-hashtagcms-app my-awesome-site
 cd my-awesome-site
 ```
 
@@ -545,7 +545,7 @@ Your project includes **comprehensive documentation**:
 ### **Basic Blog Site**
 
 ```bash
-npx create-hashtagcms-app my-blog
+npx @hashtagcms/create-hashtagcms-app my-blog
 cd my-blog
 npm install
 npm run build
@@ -570,7 +570,7 @@ npm start
 ### **Multi-Language News Portal**
 
 ```bash
-npx create-hashtagcms-app news-portal
+npx @hashtagcms/create-hashtagcms-app news-portal
 cd news-portal
 
 # Configure languages in .env
@@ -674,7 +674,7 @@ MIT © [Marghoob Suleman](https://github.com/marghoobsuleman)
 ## 🚀 Get Started Today!
 
 ```bash
-npx create-hashtagcms-app my-awesome-site
+npx @hashtagcms/create-hashtagcms-app my-awesome-site
 cd my-awesome-site
 npm install
 npm run build
