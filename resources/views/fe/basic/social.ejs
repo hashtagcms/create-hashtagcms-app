@@ -1,0 +1,16 @@
+<div class="col-6 col-md-4">
+    <h5>
+        <%= helper.trans("hashtagcms::links.follow_us") %>
+    </h5>
+    <div class="socials">
+        <% const data=cms.data || []; // Often "data" passed to module view is in cms.module.data, but RenderController
+            sets locals.cms. // If the module renderer included this, it passed data in locals.modules. // Assuming this
+            partial receives "modules" or "data" . // If included via "include('social', {data: someData})" , then local
+            data is used. // I'll assume 'data' is passed as local variable. if(Array.isArray(data)) {
+            data.forEach(function(social) { let sLabel=social.name.charAt(0).toUpperCase() + social.name.slice(1); let
+            sCss=social.name.toLowerCase(); let sHref=social.value ? social.value.trim() : '#' ; %>
+            <a class="social social-<%= sCss %>" href="<%= sHref %>" title="<%= sLabel %>" target="_blank"
+                rel="noopener nofollow"><i class="fa fa-<%= sCss %>"></i></a>
+            <% }); } %>
+    </div>
+</div>

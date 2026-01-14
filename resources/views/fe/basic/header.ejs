@@ -1,0 +1,76 @@
+<!--[if lte IE 9]>
+<p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+<![endif]-->
+<header>
+    <span style="float:right; position: relative; top:0; padding: 10px">
+        <% if(cms.meta && cms.meta.lang.isoCode==='hi' ) { %>
+            <a href="/en/web/">English</a>
+            <% } else { %>
+                <a href="/hi/web/">हिंदीं</a>
+                <% } %>
+    </span>
+    <!-- header-start -->
+    <nav class="navbar navbar-expand-lg bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="<%= helper.getPath('/') %>">
+                <%= cms.meta.site.name || 'HashtagCMS' %>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarScroll"
+                aria-controls="navbarScroll" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarScroll">
+                <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll"
+                    style="--bs-scroll-height: 100px; overflow: auto">
+                    <% if (data && Array.isArray(data)) { %>
+                        <% data.forEach(function(menu) { %>
+                            <li class="nav-item">
+                                <a class="nav-link"
+                                    href="<%= menu.is_external == 1 ? menu.link_rewrite : helper.getPath(menu.link_rewrite) %>"
+                                    target="<%= menu.target || '_self' %>" title="<%= menu.title %>">
+                                    <%= menu.name %>
+                                </a>
+                            </li>
+                            <% }); %>
+                                <% } %>
+                </ul>
+                <div class="d-flex">
+                    <ul class="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll ms-1"
+                        style="--bs-scroll-height: 100px; overflow: auto">
+                        <% if (user && user.userType && user.userType.toLowerCase()=='staff' ) { %>
+                                <li class="nav-item">
+                                    <a href="<%= helper.adminPath('dashboard') %>" class="nav-link" title="Admin"><i
+                                            aria-hidden="true" class="fa fa-dashboard"></i> <span class="text">
+                                            <%= helper.trans('hashtagcms::links.dashboard') %>
+                                        </span></a>
+                                </li>                                
+                                <li class="nav-item">
+                                        <a href="<%= helper.getPath('profile') %>" class="nav-link" title="Profile"><i
+                                                aria-hidden="true" class="fa fa-user"></i> <span class="text">
+                                                <%= helper.trans('hashtagcms::links.profile') %>
+                                            </span></a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a href="<%= helper.getPath('logout') %>" class="nav-link" title="Logout"><i
+                                                aria-hidden="true" class="fa fa-sign-out"></i> <span class="text">
+                                                <%= helper.trans('hashtagcms::links.logout') %>
+                                            </span></a>
+                                    </li>
+                                    <% } else { %>
+                                        <li class="nav-item">
+                                            <a href="<%= helper.getPath('login') %>" class="nav-link"><span>
+                                                    <%= helper.trans('hashtagcms::links.login') %>
+                                                </span></a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="<%= helper.getPath('register') %>" class="nav-link"><span>
+                                                    <%= helper.trans('hashtagcms::links.register') %>
+                                                </span></a>
+                                        </li>
+                                        <% } %>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header> <!-- end navigation -->

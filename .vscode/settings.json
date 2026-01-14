@@ -1,0 +1,8 @@
+{
+    "editor.formatOnSave": false,
+    "[ejs]": {
+        "editor.formatOnSave": false
+    },
+    "prettier.enable": true,
+    "prettier.ignorePath": ".prettierignore"
+}

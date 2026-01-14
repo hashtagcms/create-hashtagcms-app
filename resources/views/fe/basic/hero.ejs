@@ -1,0 +1,17 @@
+<% let rnm=Math.floor(Math.random() * 2) + 1; %>
+    <section class="hero" id="hero">
+        <div class="hero-inner hero-bg-<%= rnm %>">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-lg-4 hero-text">
+                        <%- helper.trans("hashtagcms::modules.hero_text_1") %>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-lg-4 hero-text">
+                        <%- helper.trans("hashtagcms::modules.hero_text_2") %>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

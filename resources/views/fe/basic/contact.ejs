@@ -1,0 +1,87 @@
+<% const inputs=locals.inputs || {}; const errors=locals.errors || {}; %>
+    <section style="margin-top:30px">
+        <div class="container mt-30">
+            <% if (locals.success) { %>
+                <div class="alert alert-success" role="alert" id="success" style="margin-bottom: 0;">
+                    <%= locals.success %> <span title="Close" class="fa fa-close" style="float:right; cursor: pointer"
+                            onclick="document.getElementById('success').style.display = 'none'">&nbsp;</span>
+                </div>
+                <% } %>
+                    <div class="card">
+                        <div class="card-header">
+                            <%= helper.trans("hashtagcms::modules.Contact Us") %>
+                        </div>
+                        <div class="card-body">
+                            <form action="/common/contact" method="post">
+                                <!-- CSRF Token handling needed here if proxying -->
+
+                                <div class="form-group v-space">
+                                    <label for="name">
+                                        <%= helper.trans("hashtagcms::modules.Name") %>
+                                    </label>
+                                    <input type="text" required
+                                        placeholder="<%= helper.trans('hashtagcms::modules.Please enter your full name') %>"
+                                        id="name" name="name" class="form-control input"
+                                        value="<%= inputs.name || '' %>">
+                                    <% if(errors.name) { %>
+                                        <div class="error text-danger">
+                                            <%= errors.name %>
+                                        </div>
+                                        <% } %>
+                                </div>
+                                <div class="form-group v-space">
+                                    <label for="email">
+                                        <%= helper.trans("hashtagcms::modules.Email") %>
+                                    </label>
+                                    <input type="email" required
+                                        placeholder="<%= helper.trans('hashtagcms::modules.Please enter your email') %>"
+                                        id="email" name="email" class="form-control input"
+                                        value="<%= inputs.email || '' %>">
+                                    <% if(errors.email) { %>
+                                        <div class="error text-danger">
+                                            <%= errors.email %>
+                                        </div>
+                                        <% } %>
+                                </div>
+                                <div class="form-group v-space">
+                                    <label for="phone">
+                                        <%= helper.trans("hashtagcms::modules.Phone") %>
+                                    </label>
+                                    <input type="text"
+                                        placeholder="<%= helper.trans('hashtagcms::modules.Please enter your phone number') %>"
+                                        id="phone" name="phone" class="form-control input"
+                                        value="<%= inputs.phone || '' %>">
+                                    <% if(errors.phone) { %>
+                                        <div class="error text-danger">
+                                            <%= errors.phone %>
+                                        </div>
+                                        <% } %>
+                                </div>
+                                <div class="form-group v-space">
+                                    <label for="comment">
+                                        <%= helper.trans("hashtagcms::modules.Comment") %>
+                                    </label>
+                                    <textarea type="text" required
+                                        placeholder="<%= helper.trans('hashtagcms::modules.Please tell us your query') %>"
+                                        id="comment" name="comment"
+                                        class="form-control input"><%= inputs.comment || '' %></textarea>
+                                    <% if(errors.comment) { %>
+                                        <div class="error text-danger">
+                                            <%= errors.comment %>
+                                        </div>
+                                        <% } %>
+                                </div>
+
+                                <div class="form-group row v-space">
+                                    <div class="col-md-8 offset-md-4">
+                                        <button type="submit" class="btn btn-primary btn-lg">
+                                            <%= helper.trans('hashtagcms::modules.Submit') %>
+                                        </button>
+
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+        </div>
+    </section>

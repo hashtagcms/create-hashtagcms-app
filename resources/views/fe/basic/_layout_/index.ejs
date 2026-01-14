@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<% const layoutManager=cms.layoutManager; %>
+    <html lang="<%= layoutManager.infoLoader.getLangIsoCode() || 'en' %>">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+        <%- layoutManager.getHeaderContent() %>
+            <%- layoutManager.getMetaContent() %>
+                <title><%- layoutManager.getTitle() %></title>                
+                    <% const sitePropsJson=JSON.stringify(cms.siteProps || {}); %>
+                        <script>
+                            window.Laravel = {};
+                            let _siteProps_ = <%- sitePropsJson %>;
+                            window.Laravel.configData = {};
+                        </script>
+    </head>
+
+    <body class="<%= layoutManager.getFestivalCss() %>" style="<%= layoutManager.getBodyBackgroundImage() %>">
+
+        <%- include('lottie', { cms: cms, helper: helper }) %>
+
+            <%- layoutManager.getBodyContent() %>
+
+                <%- layoutManager.getFooterContent() %>
+
+                    <script>
+                        try {
+                            if (typeof HashtagCms !== 'undefined') {
+                                HashtagCms.Analytics.init(_siteProps_);
+                            }
+                        } catch (e) {
+                            console.error(e);
+                        }
+                    </script>
+    </body>
+
+    </html>

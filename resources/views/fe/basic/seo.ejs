@@ -1,0 +1,40 @@
+<section class="section-faq">
+    <div class="container">
+        <div class="text-center mb-5">
+            <h2 class="heading">
+                <%= helper.trans("hashtagcms::modules.Frequently asked questions") %>
+            </h2>
+        </div>
+        <div class="row">
+            <div class="col-auto border-bottom mb-5">
+                <h4 class="faq-title">
+                    <%= helper.trans("hashtagcms::modules.Is it Free?") %>
+                </h4>
+                <p class="faq-text">
+                    <%= helper.trans("hashtagcms::modules.Yes, It's MIT license. You can ask for other license.") %>
+                </p>
+            </div>
+
+            <div class="col-auto border-bottom mb-5">
+                <h4 class="faq-title">
+                    <%= helper.trans("hashtagcms::modules.If there is any bug?") %>
+                </h4>
+                <p class="faq-text">
+                    <%- helper.trans("hashtagcms::modules.bug_post") %>
+
+                </p>
+            </div>
+
+            <div class="col-auto border-bottom mb-5">
+                <h4 class="faq-title">
+                    <%= helper.trans("hashtagcms::modules.Professional Help?") %>
+                </h4>
+                <p class="faq-text">
+                    <%= helper.trans("hashtagcms::modules.Of course, we provide professional consultants.") %>
+                        <a href='<%= helper.getPath("contact") %>'><%- helper.trans(`hashtagcms::modules.Ask for price`)
+                                %></a>.
+                </p>
+            </div>
+        </div>
+    </div>
+</section> <!-- end faq -->

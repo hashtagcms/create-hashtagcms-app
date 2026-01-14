@@ -1,0 +1,90 @@
+<% const post=(data && data.length> 0) ? data[0] : null; %>
+
+    <% if (post) { %>
+        <section class="section-blogs">
+            <div class="container">
+                <h1>
+                    <%= post.name || post.title || 'Blog Post' %>
+                </h1>
+
+                <% if (post.page_content) { %>
+                    <%- post.page_content %>
+                        <% } %>
+            </div>
+        </section>
+
+        <% if (post.enable_comments==1) { %>
+            <section class="section-comments">
+                <div class="container">
+                    <h2>Post Comments</h2>
+                    <form class="comment-form relative" action="/comment/saveComment" method="post">
+                        <input type="hidden" name="category_id" value="<%= post.category_id || '' %>" />
+                        <input type="hidden" name="page_id" value="<%= post.id || '' %>" />
+
+                        <div class="row mb-3">
+                            <div class="col-sm-2">
+                                <label for="_htcms_form_comment_name_">Name</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <input id="_htcms_form_comment_name_" name="name" type="text" class="form-control"
+                                    required placeholder="Please enter your name"
+                                    value="<%= user ? (user.name + ' ' + (user.last_name || '')) : '' %>" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-sm-2">
+                                <label for="_htcms_form_comment_email_">Email</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <input id="_htcms_form_comment_email_" type="email" name="email" class="form-control"
+                                    required placeholder="Please enter your email"
+                                    value="<%= user ? user.email : '' %>" />
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-sm-2">
+                                <label for="_htcms_form_comment_comment_">Comment</label>
+                            </div>
+                            <div class="col-sm-10">
+                                <textarea id="_htcms_form_comment_comment_" name="comment" class="form-control"
+                                    rows="7"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-sm-2"></div>
+                            <div class="col-sm-10 text-center">
+                                <button class="btn btn-lg btn-outline-secondary mb-1" type="submit">Submit</button>
+
+                                <% if (typeof session !=='undefined' && session.message) { %>
+                                    <div class="alert text-success">
+                                        <%= session.message %>
+                                    </div>
+                                    <% } %>
+
+                                        <% if (typeof errors !=='undefined' && Object.keys(errors).length> 0) { %>
+                                            <div class="alert alert-danger">
+                                                <ul>
+                                                    <% Object.values(errors).forEach(function(error) { %>
+                                                        <li>
+                                                            <%= error %>
+                                                        </li>
+                                                        <% }); %>
+                                                </ul>
+                                            </div>
+                                            <% } %>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </section>
+            <% } %>
+                <% } else { %>
+                    <section class="section-blogs">
+                        <div class="container">
+                            <p>No blog post found.</p>
+                        </div>
+                    </section>
+                    <% } %>

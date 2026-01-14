@@ -1,0 +1,31 @@
+<footer class="footer">
+    <div class="container">
+        <div class="footer-widgets">
+            <div class="row">
+                <div class="col-6 col-md-4">
+                    <h5 class="widget-title">
+                        <%= helper.trans('hashtagcms::links.support') %>
+                    </h5>
+                    <ul class="list-footer">
+                        <li class="nav-item"><a class="nav-link" href="<%= helper.getPath('contact') %>">
+                                <%= helper.trans('hashtagcms::links.contact_us') %>
+                            </a></li>
+                        <li class="nav-item"><a class="nav-link" href="<%= helper.getPath('support/tnc') %>">
+                                <%= helper.trans('hashtagcms::links.tnc') %>
+                            </a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div> <!-- end container -->
+
+    <div class="copyright">
+        <div class="container text-center">
+            <span class="copyright">
+                &copy; <%= new Date().getFullYear() %>
+                    <%= cms.meta.site_name || 'HashtagCMS' %>
+                        <br>
+            </span>
+        </div>
+    </div> <!-- end footer bottom -->
+</footer>
