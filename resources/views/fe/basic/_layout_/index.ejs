@@ -15,6 +15,13 @@
                             window.Laravel = {};
                             let _siteProps_ = <%- sitePropsJson %>;
                             window.Laravel.configData = {};
+                            
+                            // HashtagCMS API Configuration for frontend
+                            window.HashtagCmsConfig = {
+                                subscribeApi: '<%= cms.config.subscribe_api || "" %>',
+                                contactApi: '<%= cms.config.contact_api || "" %>',
+                                context: '<%= cms.config.context || "" %>'
+                            };
                         </script>
     </head>
 

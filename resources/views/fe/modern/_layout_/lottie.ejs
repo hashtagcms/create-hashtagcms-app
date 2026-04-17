@@ -1,0 +1,47 @@
+<% const lottieObj=cms.lottie || []; const hasLottie=Array.isArray(lottieObj) && lottieObj.length>= 1;
+    %>
+    <script>
+        let LottieHandler = {
+            hideOnComplete: function (lottieRef, lottieObj) {
+                if (lottieObj?.lottieHideOnComplete === true) {
+                    document.getElementById(lottieRef).addEventListener('frame', (frame) => {
+                        if (Math.round(frame.detail.seeker) === 100) {
+                            frame.target.remove();
+                        }
+                    });
+                }
+
+            }
+        }
+    </script>
+    <% if(hasLottie) { %>
+        <script src="https://unpkg.com/@dotlottie/player-component@latest/dist/dotlottie-player.mjs"
+            type="module"></script>
+        <% lottieObj.forEach(function(lottieO) { let attributes='' ; let styles='' ; // Attributes
+            if(lottieO.lottieAttributes) { Object.keys(lottieO.lottieAttributes).forEach(key=> {
+            let value = lottieO.lottieAttributes[key];
+            if (typeof value === 'boolean') {
+            attributes += (value === true) ? key + " " : "";
+            } else {
+            attributes += key + "=" + value + " ";
+            }
+            });
+            }
+            // Styles
+            if(lottieO.lottieStyles) {
+            Object.keys(lottieO.lottieStyles).forEach(key => {
+            let value = lottieO.lottieStyles[key];
+            value = (typeof value === 'boolean') ? (value ? 'true' : 'false') : value;
+            styles += key + ':' + value + ';';
+            });
+            }
+            styles = "style=" + styles;
+            let lottiePlayer = "lottiePlayer_" + lottieO.id;
+            %>
+            <dotlottie-player id="<%= lottiePlayer %>" src="<%= helper.asset(lottieO.lottie) %>" <%- attributes %>
+                <%- styles %>></dotlottie-player>
+            <script>
+                LottieHandler.hideOnComplete("<%= lottiePlayer %>", <% - JSON.stringify(lottieO) %>);
+            </script>
+            <% }); %>
+                <% } %>

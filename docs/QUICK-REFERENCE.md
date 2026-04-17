@@ -20,7 +20,7 @@ A quick reference for common tasks and code snippets in the HashtagCMS Node.js F
 
 ```bash
 # Recommended: Clone complete repository
-git clone https://github.com/marghoobsuleman/hashtagcms-nodejs-frontend.git my-project
+git clone https://github.com/hashtagcms/nodejs-frontend.git my-project
 cd my-project
 npm install
 

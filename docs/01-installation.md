@@ -108,7 +108,7 @@ Creating a new HashtagCMS Node.js frontend in /path/to/my-project
 
 ```bash
 # Option A: Clone into a temp directory and copy files
-git clone https://github.com/marghoobsuleman/hashtagcms-nodejs-frontend.git temp
+git clone https://github.com/hashtagcms/nodejs-frontend.git temp
 cp -r temp/src my-project/
 cp -r temp/views my-project/
 cp -r temp/config my-project/
@@ -129,7 +129,7 @@ Clone the complete repository with all source files:
 
 **Option A: Clone from Git**
 ```bash
-git clone https://github.com/marghoobsuleman/hashtagcms-nodejs-frontend.git my-project
+git clone https://github.com/hashtagcms/nodejs-frontend.git my-project
 cd my-project
 npm install
 ```

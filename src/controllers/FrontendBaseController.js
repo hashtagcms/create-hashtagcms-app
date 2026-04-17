@@ -114,12 +114,20 @@ class FrontendBaseController extends Controller {
                 }
             }
 
+            timings.render = Date.now() - renderStart;
+            timings.total = Date.now() - timings.start;
+
             res.render(viewName, {
                 cms: {
                     layoutManager: this.layoutManager,
                     siteProps: this.infoLoader.getSiteProps(),
                     data: this.infoLoader.getConfigs(),
                     meta: result.meta,
+                    config: Config.get('hashtagcms'), // Expose hashtagcms config for API URLs
+                    performance: {
+                        loadDataTime: timings.loadData,
+                        pageRenderTime: timings.total
+                    }
                 },
                 user: res.locals.user || null,
                 inputs: res.locals.inputs || {},
@@ -127,8 +135,6 @@ class FrontendBaseController extends Controller {
                 session: res.locals.session || {}
             });
             
-            timings.render = Date.now() - renderStart;
-            timings.total = Date.now() - timings.start;
 
             // Log performance metrics
             Logger.info('Page render completed', {

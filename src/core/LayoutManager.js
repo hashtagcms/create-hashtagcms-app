@@ -56,9 +56,28 @@ class LayoutManager {
         return theme ? theme.directory : 'basic';
     }
 
-    getFestivalCss() { return ""; } // Stub
-    getBodyBackgroundImage() { return ""; } // Stub
-    renderStack(stack) { return ""; } // Stub
+    isRtl() {
+        const lang = this.infoLoader.getLangData();
+        return (lang && (lang.isRtl == 1 || lang.is_rtl == 1)) ? "rtl" : "ltr";
+    }
+
+    getFestivalCss() {
+        const theme = this.infoLoader.getThemeData();
+        return (theme && theme.bodyClass) ? theme.bodyClass : "";
+    }
+
+    getBodyBackgroundImage() {
+        const theme = this.infoLoader.getThemeData();
+        if (theme && theme.bodyBackgroundImage) {
+            return `background-image: url('${theme.bodyBackgroundImage}')`;
+        }
+        return "";
+    }
+
+    renderStack(stack) {
+        // Node implementation of stacks could be added later if needed
+        return "";
+    }
 
     /**
      * Init: Load Data and Prepare
@@ -269,6 +288,7 @@ class LayoutManager {
             queryData: module.queryData || module.query_data || [], // Handle potential snake_case
             moduleProps: module.moduleProps,
             module: module,
+            moduleInfo: module, // Added for compatibility with Laravel-ported views
             // Reconstruct 'cms' object for view compatibility
             cms: {
                 ...(this.infoLoader.loadData || {}),

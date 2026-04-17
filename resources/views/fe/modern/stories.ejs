@@ -1,0 +1,120 @@
+<% 
+    const results = (data && data.results) ? data.results : (Array.isArray(data) ? data : []);
+    const hasData = results.length > 0;
+    const firstStory = hasData ? results[0] : null;
+    const restStories = hasData ? results.slice(1) : [];
+%>
+
+<section class="py-20 bg-slate-50" id="stories">
+    <div class="container mx-auto px-4 lg:px-8">
+        
+        <% if(hasData) { %>
+            <!-- Featured First Story -->
+            <div class="mb-16">
+                <article class="modern-card group hover:shadow-2xl transition-all duration-500 overflow-hidden relative border-t-4 border-t-blue-500">
+                    <div class="p-10 lg:p-16 relative z-10">
+                        <div class="flex flex-wrap items-center justify-start mb-6 gap-4">
+                            <div class="flex items-center space-x-2 text-sm font-bold text-blue-600 bg-blue-50 px-4 py-1.5 rounded-full border border-blue-100 uppercase tracking-widest shadow-sm">
+                                <i class="fa fa-star"></i>
+                                <span>Featured Story</span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-sm font-bold text-slate-900 bg-white px-4 py-1.5 rounded-full border border-slate-100 shadow-sm">
+                                <i class="fa fa-calendar-o text-blue-500"></i>
+                                <span><%= helper.formatDate(firstStory.createdAt) %></span>
+                            </div>
+                            <div class="flex items-center space-x-2 text-slate-600 text-sm font-bold bg-white px-4 py-1.5 rounded-full border border-slate-100 shadow-sm">
+                                <i class="fa fa-comment-o text-blue-500"></i>
+                                <span><%= firstStory.commentsCount || 0 %> Comments</span>
+                            </div>
+                        </div>
+                        
+                        <h2 class="text-4xl lg:text-6xl font-black text-slate-900 mb-8 leading-tight tracking-tight group-hover:text-blue-600 transition-colors duration-300">
+                            <a href="<%= helper.getPath(firstStory.categoryLinkRewrite + '/' + firstStory.linkRewrite) %>">
+                                <%= firstStory.title %>
+                            </a>
+                        </h2>
+                        
+                        <div class="prose prose-xl text-slate-600 mb-12 line-clamp-3">
+                            <%- firstStory.description %>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row items-center justify-between pt-8 border-t border-slate-100 gap-6">
+                            <div class="flex items-center space-x-4">
+                                <% if(firstStory.author) { %>
+                                    <div class="w-14 h-14 bg-gradient-to-br from-blue-500 to-slate-400 rounded-full flex items-center justify-center text-white shadow-md">
+                                        <i class="fa fa-user text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <p class="text-xs text-slate-400 uppercase font-bold tracking-widest mb-1">Written By</p>
+                                        <p class="text-lg font-bold text-slate-900">
+                                            <%= firstStory.author %>
+                                        </p>
+                                    </div>
+                                <% } %>
+                            </div>
+                            <a href="<%= helper.getPath(firstStory.categoryLinkRewrite + '/' + firstStory.linkRewrite) %>" class="modern-button shadow-lg">
+                                Read Full Story <i class="fa fa-arrow-right ml-2 group-hover:translate-x-2 transition-transform"></i>
+                            </a>
+                        </div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- Grid of Remaining Stories -->
+            <% if(restStories.length > 0) { %>
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <% restStories.forEach(function(story) { %>
+                        <article class="modern-card group hover:shadow-xl transition-all duration-500 flex flex-col h-full bg-white relative">
+                            <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-slate-200 to-blue-400 opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                            <div class="p-8 flex-1 flex flex-col">
+                                <div class="flex items-center justify-between mb-6">
+                                    <div class="flex items-center space-x-2 text-xs font-bold text-slate-700 bg-slate-50 px-3 py-1.5 rounded border border-slate-100">
+                                        <i class="fa fa-calendar-o text-blue-500"></i>
+                                        <span><%= helper.formatDate(story.createdAt) %></span>
+                                    </div>
+                                    <% if((story.commentsCount || 0) > 0) { %>
+                                        <div class="flex items-center space-x-1 text-slate-400 text-xs font-bold">
+                                            <i class="fa fa-comment"></i>
+                                            <span><%= story.commentsCount %></span>
+                                        </div>
+                                    <% } %>
+                                </div>
+                                
+                                <h3 class="text-2xl font-black text-slate-900 mb-4 group-hover:text-blue-600 transition-colors leading-tight line-clamp-2">
+                                    <a href="<%= helper.getPath(story.categoryLinkRewrite + '/' + story.linkRewrite) %>">
+                                        <%= story.title %>
+                                    </a>
+                                </h3>
+                                
+                                <div class="prose prose-md text-slate-500 mb-8 line-clamp-3 flex-1 font-light">
+                                    <%- story.description %>
+                                </div>
+
+                                <div class="flex items-center justify-between pt-6 border-t border-slate-100 mt-auto">
+                                    <div class="flex items-center space-x-2">
+                                        <% if(story.author) { %>
+                                            <span class="text-xs font-bold text-blue-600 uppercase tracking-widest bg-blue-50 px-3 py-1 rounded">
+                                                By <%= story.author %>
+                                            </span>
+                                        <% } %>
+                                    </div>
+                                    <a href="<%= helper.getPath(story.categoryLinkRewrite + '/' + story.linkRewrite) %>" class="text-blue-600 font-bold hover:text-slate-900 flex items-center transition-colors group/link px-2">
+                                        Read <i class="fa fa-angle-right ml-2 group-hover/link:translate-x-1 transition-transform"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </article>
+                    <% }); %>
+                </div>
+            <% } %>
+        <% } else { %>
+            <div class="modern-card p-20 text-center max-w-2xl mx-auto shadow-xl">
+                <div class="w-24 h-24 bg-slate-50 rounded-full flex items-center justify-center mx-auto mb-6 text-blue-400 shadow-inner border-2 border-white">
+                    <i class="fa fa-newspaper-o text-4xl"></i>
+                </div>
+                <h3 class="text-3xl font-black text-slate-900 mb-3 tracking-tight">No stories found</h3>
+                <p class="text-lg text-slate-400 font-light">Check back later for new insights.</p>
+            </div>
+        <% } %>
+    </div>
+</section>

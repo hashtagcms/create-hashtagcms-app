@@ -1,0 +1,65 @@
+<footer class="bg-white text-slate-600 pt-20 pb-10 border-t border-slate-100 relative overflow-hidden">
+    <div class="container mx-auto px-4 lg:px-12 relative z-10">
+        <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+            <!-- Branding/About -->
+            <div class="md:col-span-2">
+                <a class="text-2xl font-bold text-slate-900 mb-6 inline-flex items-center gap-2.5 group tracking-tight"
+                    href="<%= helper.getPath('/') %>">
+                    <div
+                        class="w-9 h-9 bg-white rounded-lg flex items-center justify-center text-white transition-transform duration-500 group-hover:scale-105">
+                        <span class="italic text-lg font-bold">
+                            <img src="<%= helper.asset('img/logo.png') %>" alt=""
+                                class="w-full h-full object-cover">
+                        </span>
+                    </div>
+                    <span><%= cms.meta.site.name || 'HashtagCMS' %></span>
+                </a>
+                <p class="text-slate-500 max-w-sm text-base leading-relaxed mt-4">
+                    <%= helper.trans('hashtagcms::messages.theme_description') %>
+                </p>
+            </div>
+
+            <!-- Links -->
+            <div>
+                <h5 class="text-xs font-bold mb-6 text-slate-900 uppercase tracking-widest"><%= helper.trans('hashtagcms::links.resources') %></h5>
+                <ul class="space-y-3">
+                    <li><a class="text-slate-500 hover:text-slate-900 transition-colors text-sm"
+                            href="#"><%= helper.trans('hashtagcms::links.documentation') %></a></li>
+                    <li><a class="text-slate-500 hover:text-slate-900 transition-colors text-sm" href="#"><%= helper.trans('hashtagcms::links.components') %></a>
+                    </li>
+                    <li><a class="text-slate-500 hover:text-slate-900 transition-colors text-sm" href="#"><%= helper.trans('hashtagcms::links.theme_setup') %></a></li>
+                </ul>
+            </div>
+
+            <div>
+                <h5 class="text-xs font-bold mb-6 text-slate-900 uppercase tracking-widest"><%= helper.trans('hashtagcms::links.connect') %></h5>
+                <div class="flex space-x-3">
+                    <a href="#"
+                        class="w-10 h-10 rounded-lg bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-400 hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all duration-300">
+                        <i class="fa-brands fa-facebook-f text-sm"></i>
+                    </a>
+                    <a href="#"
+                        class="w-10 h-10 rounded-lg bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-400 hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all duration-300">
+                        <i class="fa-brands fa-twitter text-sm"></i>
+                    </a>
+                    <a href="#"
+                        class="w-10 h-10 rounded-lg bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-400 hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all duration-300">
+                        <i class="fa-brands fa-github text-sm"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="pt-8 border-t border-slate-100 flex flex-col md:flex-row items-center justify-between gap-6">
+            <p class="text-slate-400 text-xs">
+                &copy; <%= new Date().getFullYear() %> <%= helper.trans('hashtagcms::links.all_rights_reserved') %>.
+            </p>
+            <div class="flex items-center space-x-6 text-xs text-slate-400 font-medium">
+                <a href="<%= helper.getPath('support/privacy-policy') %>"
+                    class="hover:text-slate-900 transition-colors"><%= helper.trans('hashtagcms::links.privacy_policy') %></a>
+                <span class="text-slate-200">&bull;</span>
+                <a href="<%= helper.getPath('support/tnc') %>" class="hover:text-slate-900 transition-colors"><%= helper.trans('hashtagcms::links.terms_of_service') %></a>
+            </div>            
+        </div>
+    </div>
+</footer>

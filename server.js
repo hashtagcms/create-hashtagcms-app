@@ -288,12 +288,31 @@ const { AppError } = require('./src/errors/AppError');
         }));
         
         // ============================================
+        // Global Variables for Views
+        // Must be AFTER session middleware and BEFORE routes
+        // ============================================
+        app.use((req, res, next) => {
+            res.locals.appUrl = process.env.APP_URL || `http://localhost:${PORT}`;
+            res.locals.user = req.session.user || null;
+            res.locals.session = req.session;
+            
+            // Set cache headers for dynamic content
+            if (!req.path.startsWith('/api/') && !req.path.startsWith('/common/')) {
+                res.set('Cache-Control', 'public, max-age=300'); // 5 minutes
+            }
+            
+            next();
+        });
+
+        // ============================================
         // Routes Configuration
         // Moved here to ensure Session Middleware is loaded first
         // ============================================
         const apiV1Routes = require('./src/routes/api/v1');
+        const commonRoutes = require('./src/routes/common');
         app.use('/api/v1', apiV1Routes);
         app.use('/api/cache', cacheRoutes); // Backward compatibility
+        app.use('/common', commonRoutes); // Newsletter/Subscribe and Contact form handlers
         app.use('/', webRoutes);
 
         // ============================================
@@ -319,23 +338,6 @@ const { AppError } = require('./src/errors/AppError');
 
         // Global error handler (must be last)
         app.use(errorHandler);
-
-        // ============================================
-        // Global Variables for Views
-        // Must be AFTER session middleware
-        // ============================================
-        app.use((req, res, next) => {
-            res.locals.appUrl = process.env.APP_URL || `http://localhost:${PORT}`;
-            res.locals.user = req.session.user || null;
-            res.locals.session = req.session;
-            
-            // Set cache headers for dynamic content
-            if (!req.path.startsWith('/api/')) {
-                res.set('Cache-Control', 'public, max-age=300'); // 5 minutes
-            }
-            
-            next();
-        });
         
         // Preload site configs and translations
         await StartupPreloader.preload();

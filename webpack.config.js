@@ -4,6 +4,7 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const { VueLoaderPlugin } = require('vue-loader');
 const autoprefixer = require('autoprefixer');
 const cssnano = require('cssnano');
+const tailwindcss = require('@tailwindcss/postcss');
 const CaseSensitivePathsPlugin = require('case-sensitive-paths-webpack-plugin');
 const fs = require('fs');
 
@@ -48,6 +49,15 @@ let themesForFrontend = [
         assets: [
             { source: 'js/app.js', target: 'js/app', type: 'js' },
             { source: 'sass/app.scss', target: 'css/app', type: 'css' },
+            { source: 'img', target: 'img', type: 'copy' },
+            { source: 'fonts', target: 'fonts', type: 'copy' }
+        ]
+    },
+    {
+        theme: { source: 'modern', type: 'theme' },
+        assets: [
+            { source: 'js/app.js', target: 'js/app', type: 'js' },
+            { source: 'css/app.css', target: 'css/app', type: 'css' },
             { source: 'img', target: 'img', type: 'copy' },
             { source: 'fonts', target: 'fonts', type: 'copy' }
         ]
@@ -100,7 +110,7 @@ module.exports = {
                 use: [
                     MiniCssExtractPlugin.loader,
                     { loader: "css-loader", options: { url: false, importLoaders: 1 } },
-                    { loader: 'postcss-loader', options: { postcssOptions: { plugins: [autoprefixer, cssnano], }, } },
+                    { loader: 'postcss-loader', options: { postcssOptions: { plugins: [tailwindcss, autoprefixer, cssnano], }, } },
                 ],
             },
             {

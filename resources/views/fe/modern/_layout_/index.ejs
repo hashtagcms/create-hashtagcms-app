@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<% const layoutManager=cms.layoutManager; %>
+<html lang="<%= layoutManager.infoLoader.getLangIsoCode() || 'en' %>" dir="<%= layoutManager.isRtl() %>">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="csrf-token" content="">
+
+    <% 
+        const analyticsProps = {
+            ...(cms.siteProps || {}),
+            siteId: cms.meta?.site?.id,
+            langId: cms.meta?.lang?.id,
+            platformId: cms.meta?.platform?.id,
+            categoryId: cms.meta?.category?.id,
+            pageId: cms.meta?.page?.id,
+            categoryName: cms.meta?.category?.name,
+            pageName: cms.meta?.page?.name,
+            linkRewrite: cms.meta?.category?.linkRewrite
+        };
+        const sitePropsJson = JSON.stringify(analyticsProps); 
+    %>
+    <script>
+        window.Laravel = {
+            csrfToken: '' 
+        };
+        let _siteProps_ = <%- sitePropsJson %>;
+        window.Laravel.configData = {};
+        window.Laravel.configData.media = <%- JSON.stringify(cms.config.media || {}) %>;
+        
+        // HashtagCMS API Configuration for frontend
+        window.HashtagCmsConfig = {
+            subscribeApi: '/common/subscribe',
+            contactApi: '/common/contact',
+            publishApi: '/common/publish',
+            context: '<%= cms.config.context || "" %>',
+            categoryId: _siteProps_.categoryId,
+            pageId: _siteProps_.pageId
+        };
+    </script>
+
+    <%- layoutManager.getHeaderContent() %>
+    <%- layoutManager.getMetaContent() %>
+    <title><%- layoutManager.getTitle() %></title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+
+<body class="<%= layoutManager.getFestivalCss() %>" style="<%= layoutManager.getBodyBackgroundImage() %>">
+
+    <%- include('lottie', { cms: cms, helper: helper }) %>
+
+    <%- layoutManager.getBodyContent() %>
+
+    <div class="small" style="padding:10px; text-align: center;">
+        <a title="#CMS" href="https://www.hashtagcms.org/"><%= helper.trans('hashtagcms::links.powered_by') %> HashtagCMS</a>
+    </div>
+
+    <%- layoutManager.getFooterContent() %>
+
+    <div class="text-[10px] text-slate-400 py-5 text-center">        
+        <span><%= helper.trans('hashtagcms::links.page_render') %>: <%= cms.performance?.pageRenderTime || '' %>ms</span>
+    </div>
+
+    <% if (process.env.GOOGLE_TAG_MANAGER_KEY) { %>
+        <script async src="https://www.googletagmanager.com/gtag/js?id=<%= process.env.GOOGLE_TAG_MANAGER_KEY %>"></script>
+        <script>
+            try {
+                window.dataLayer = window.dataLayer || [];
+                function gtag() { dataLayer.push(arguments); }
+                gtag('js', new Date());
+                gtag('config', "<%= process.env.GOOGLE_TAG_MANAGER_KEY %>");
+                
+                let pageUrl = window.location.pathname.replace("/", "") === "" ? "homepage" : window.location.pathname.replace("/", "");
+                gtag('event', 'pageView', {
+                    'pageName': (_siteProps_.pageId === -1) ? _siteProps_.categoryName : _siteProps_.pageName,
+                    'pageUrl': pageUrl
+                });
+            } catch (e) {
+                console.error(e.message);
+            }
+        </script>
+    <% } %>
+    
+</body>
+
+</html>

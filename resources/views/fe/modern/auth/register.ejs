@@ -1,0 +1,73 @@
+<% const inputs = locals.inputs || {}; const errors = locals.errors || {}; %>
+
+<div class="py-24 bg-modern-bg min-h-[90vh] flex items-center">
+    <div class="container mx-auto px-4 lg:px-8">
+        <div class="max-w-md mx-auto">
+            <div class="modern-card">
+                <div class="bg-modern-card-header p-8 text-white text-center">
+                    <div class="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-user-plus text-2xl"></i>
+                    </div>
+                    <h1 class="text-3xl font-bold tracking-tight"><%= helper.trans('hashtagcms::auth.Register') %></h1>
+                    <p class="text-white/80 mt-2 font-medium"><%= helper.trans('hashtagcms::auth.one_last_step') %></p>
+                </div>
+
+                <div class="p-8 lg:p-10 bg-white">
+                    <form method="POST" action="/register" class="space-y-6">
+
+                        <div class="space-y-2">
+                            <label for="name" class="block text-sm font-bold text-modern-navy/70"><%= helper.trans('hashtagcms::auth.Name') %></label>
+                            <input id="name" type="text" class="modern-input<%= errors.name ? ' border-red-500' : '' %>" name="name" value="<%= inputs.name || '' %>" required autofocus placeholder="<%= helper.trans('hashtagcms::auth.your_full_name') %>">
+                            <% if (errors.name) { %>
+                                <p class="text-red-600 text-sm mt-1 flex items-center space-x-1">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    <span><%= errors.name %></span>
+                                </p>
+                            <% } %>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label for="email" class="block text-sm font-bold text-modern-navy/70"><%= helper.trans('hashtagcms::auth.E-Mail Address') %></label>
+                            <input id="email" type="email" class="modern-input<%= errors.email ? ' border-red-500' : '' %>" name="email" value="<%= inputs.email || '' %>" required placeholder="<%= helper.trans('hashtagcms::auth.your_email') %>">
+                            <% if (errors.email) { %>
+                                <p class="text-red-600 text-sm mt-1 flex items-center space-x-1">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    <span><%= errors.email %></span>
+                                </p>
+                            <% } %>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label for="password" class="block text-sm font-bold text-modern-navy/70"><%= helper.trans('hashtagcms::auth.Password') %></label>
+                            <input id="password" type="password" class="modern-input<%= errors.password ? ' border-red-500' : '' %>" name="password" required placeholder="<%= helper.trans('hashtagcms::auth.choose_password') %>">
+                            <% if (errors.password) { %>
+                                <p class="text-red-600 text-sm mt-1 flex items-center space-x-1">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    <span><%= errors.password %></span>
+                                </p>
+                            <% } %>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label for="password-confirm" class="block text-sm font-bold text-modern-navy/70"><%= helper.trans('hashtagcms::auth.Confirm Password') %></label>
+                            <input id="password-confirm" type="password" class="modern-input" name="password_confirmation" required placeholder="<%= helper.trans('hashtagcms::auth.confirm_password') %>">
+                        </div>
+
+                        <div class="pt-2">
+                            <button type="submit" class="modern-button w-full">
+                                <%= helper.trans('hashtagcms::auth.Register') %>
+                            </button>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="px-8 pb-8 bg-white text-center border-t border-slate-100">
+                    <p class="text-sm text-slate-500 mt-6">
+                        <%= helper.trans('hashtagcms::auth.already_have_account') %> 
+                        <a href="<%= helper.getPath('login') %>" class="text-modern-blue hover:text-modern-navy font-bold transition-colors"><%= helper.trans('hashtagcms::auth.login_here') %></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

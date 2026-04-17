@@ -7,7 +7,7 @@ const options = {
         info: {
             title: 'HashtagCMS Frontend API',
             version: '1.0.0',
-            description: 'Enterprise-grade Node.js Frontend API for HashtagCMS',
+            description: 'Advanced-grade Node.js Frontend API for HashtagCMS',
             contact: {
                 name: 'HashtagCMS Support',
                 url: 'https://hashtagcms.org'

@@ -622,15 +622,15 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for details.
 
 ## 📄 License
 
-MIT © [Marghoob Suleman](https://github.com/marghoobsuleman)
+MIT © [Marghoob Suleman](https://github.com/hashtagcms)
 
 ---
 
 ## 🌟 Related Projects
 
-- **[HashtagCMS](https://github.com/marghoobsuleman/hashtagcms)** - The headless CMS backend
-- **[@hashtagcms/jskit](https://www.npmjs.com/package/@hashtagcms/jskit)** - JavaScript utilities for backend CMS
-- **[@hashtagcms/themes](https://www.npmjs.com/package/@hashtagcms/themes)** - Theme components for frontend
+- **[HashtagCMS](https://github.com/hashtagcms/hashtagcms)** - The headless CMS backend
+- **[@hashtagcms/admin-ui-kit](https://www.npmjs.com/package/@hashtagcms/admin-ui-kit)** - JavaScript utilities for backend CMS
+- **[@hashtagcms/web-ui-kit](https://www.npmjs.com/package/@hashtagcms/web-ui-kit)** - Theme components for frontend
 
 ---
 

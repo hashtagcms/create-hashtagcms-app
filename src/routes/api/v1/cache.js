@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const RedisCacheManager = require('../../../utils/RedisCacheManager');
 const Logger = require('../../../utils/Logger');
-const { validateBody, validateQuery } = require('../../../middleware/validator');
+const { validateBody } = require('../../../middleware/Validator');
 const { clearCacheSchema, clearAllCacheSchema, warmCacheSchema } = require('../../../validators/cacheValidator');
 
 /**
@@ -179,7 +179,7 @@ router.post('/warm', validateBody(warmCacheSchema), async (req, res) => {
         const { site, lang, platform, category } = req.body;
         
         // Import CmsService to fetch data
-        const CmsService = require('../services/CmsService');
+        const CmsService = require('../../../services/CmsService');
         
         // Fetch data (this will cache it)
         const data = await CmsService.loadPageData(category, lang, platform);

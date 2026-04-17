@@ -1,0 +1,83 @@
+<% const errorCode = locals.error_code || 0; const inputs = locals.inputs || {}; const errors = locals.errors || {}; const redirect = locals.redirect || inputs.redirect || ''; %>
+
+<div class="py-24 bg-modern-bg min-h-[90vh] flex items-center">
+    <div class="container mx-auto px-4 lg:px-8">
+        <% if(errorCode > 0) { %>
+            <div class="max-w-md mx-auto mb-8">
+                <% const errorMessage = locals.error_message || ''; %>
+                <div class="p-4 bg-red-50 border border-red-200 text-red-700 rounded-2xl flex items-center space-x-3">
+                    <i class="fa fa-exclamation-circle text-xl"></i>
+                    <span><%- errorMessage %></span>
+                </div>
+            </div>
+        <% } %>
+        
+        <div class="max-w-md mx-auto">
+            <div class="modern-card">
+                <div class="bg-modern-card-header p-8 text-white text-center">
+                    <div class="w-16 h-16 bg-white/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                        <i class="fa fa-sign-in text-2xl"></i>
+                    </div>
+                    <h1 class="text-3xl font-bold tracking-tight"><%= helper.trans('hashtagcms::auth.Login') %></h1>
+                    <p class="text-white/80 mt-2 font-medium"><%= helper.trans('hashtagcms::auth.welcome_back') %></p>
+                </div>
+                
+                <div class="p-8 lg:p-10 bg-white">
+                    <form method="POST" action="/login" class="space-y-6">
+                        <% if(redirect) { %>
+                            <input id="redirect" type="hidden" name="redirect" value="<%= redirect %>">
+                        <% } %>
+
+                        <div class="space-y-2">
+                            <label for="email" class="block text-sm font-bold text-modern-navy/70"><%= helper.trans('hashtagcms::auth.Email Address') %></label>
+                            <input id="email" type="email" class="modern-input<%= errors.email ? ' border-red-500' : '' %>" name="email" value="<%= inputs.email || '' %>" required autofocus placeholder="<%= helper.trans('hashtagcms::auth.your_email') %>">
+                            <% if (errors.email) { %>
+                                <p class="text-red-600 text-sm mt-1 flex items-center space-x-1">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    <span><%= errors.email %></span>
+                                </p>
+                            <% } %>
+                        </div>
+
+                        <div class="space-y-2">
+                            <label for="password" class="block text-sm font-bold text-modern-navy/70"><%= helper.trans('hashtagcms::auth.Password') %></label>
+                            <input id="password" type="password" class="modern-input<%= errors.password ? ' border-red-500' : '' %>" name="password" required placeholder="<%= helper.trans('hashtagcms::auth.enter_password') %>">
+                            <% if (errors.password) { %>
+                                <p class="text-red-600 text-sm mt-1 flex items-center space-x-1">
+                                    <i class="fa fa-exclamation-circle"></i>
+                                    <span><%= errors.password %></span>
+                                </p>
+                            <% } %>
+                        </div>
+
+                        <div class="flex items-center">
+                            <input type="checkbox" name="remember" id="remember" class="w-4 h-4 text-modern-blue rounded focus:ring-modern-blue/20" <%= inputs.remember ? 'checked' : '' %>>
+                            <label for="remember" class="ml-2 text-sm text-modern-navy/70">
+                                <%= helper.trans('hashtagcms::auth.Remember Me') %>
+                            </label>
+                        </div>
+
+                        <div class="space-y-4 pt-2">
+                            <button type="submit" class="modern-button w-full">
+                                <%= helper.trans('hashtagcms::auth.Login') %>
+                            </button>
+                            
+                            <div class="text-center">
+                                <a class="text-modern-blue hover:text-modern-navy font-semibold text-sm transition-colors" href="/password/reset">
+                                    <%= helper.trans('hashtagcms::auth.Forgot Your Password?') %>
+                                </a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                
+                <div class="px-8 pb-8 bg-white text-center border-t border-slate-100">
+                    <p class="text-sm text-slate-500 mt-6">
+                        <%= helper.trans('hashtagcms::auth.dont_have_account') %> 
+                        <a href="<%= helper.getPath('register') %>" class="text-modern-blue hover:text-modern-navy font-bold transition-colors"><%= helper.trans('hashtagcms::auth.register_here') %></a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -9,11 +9,13 @@ const AnalyticsController = require('../controllers/AnalyticsController');
 const BlogController = require('../controllers/BlogController');
 const CommentController = require('../controllers/CommentController');
 const CommonController = require('../controllers/CommonController');
+const ContactController = require('../controllers/ContactController');
 const LoginController = require('../controllers/LoginController');
 const LogoutController = require('../controllers/LogoutController');
 const PasswordController = require('../controllers/PasswordController');
 const ProfileController = require('../controllers/ProfileController');
 const RegisterController = require('../controllers/RegisterController');
+const SubscribeController = require('../controllers/SubscribeController');
 
 const controllers = {
     FrontendController,
@@ -21,11 +23,13 @@ const controllers = {
     BlogController,
     CommentController,
     CommonController,
+    ContactController,
     LoginController,
     LogoutController,
     PasswordController,
     ProfileController,
-    RegisterController
+    RegisterController,
+    SubscribeController
 };
 
 // Health Check

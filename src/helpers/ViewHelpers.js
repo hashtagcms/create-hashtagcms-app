@@ -58,10 +58,14 @@ class ViewHelpers {
     static trans(key, lang = 'en') {
         const transData = this.getTranslations(lang);
         const cleanKey = key.replace('hashtagcms::', '');
-        const parts = cleanKey.split('.');
+        const dotIndex = cleanKey.indexOf('.');
         
-        if (parts.length === 2 && transData[parts[0]]) {
-            return transData[parts[0]][parts[1]] || parts[parts.length - 1];
+        if (dotIndex !== -1) {
+            const file = cleanKey.substring(0, dotIndex);
+            const transKey = cleanKey.substring(dotIndex + 1);
+            if (transData[file]) {
+                return transData[file][transKey] || transKey;
+            }
         }
         
         return key;
@@ -160,7 +164,9 @@ class ViewHelpers {
             modules: {},
             links: {},
             auth: {},
-            common: {}
+            common: {},
+            messages: {},
+            validation: {}
         };
     }
     
@@ -171,7 +177,7 @@ class ViewHelpers {
      */
     static async preloadAllTranslations() {
         const languages = this.getSupportedLanguages();
-        const files = ['modules', 'links', 'auth', 'common'];
+        const files = ['modules', 'links', 'auth', 'common', 'messages', 'validation'];
         
         Logger.info('Preloading translations asynchronously...');
         

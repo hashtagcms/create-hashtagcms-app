@@ -96,7 +96,7 @@ This project is designed for developers who want to:
 Clone the complete repository:
 
 ```bash
-git clone https://github.com/marghoobsuleman/hashtagcms-nodejs-frontend.git my-project
+git clone https://github.com/hashtagcms/nodejs-frontend.git my-project
 cd my-project
 npm install
 ```

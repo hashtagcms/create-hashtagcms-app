@@ -1,0 +1,18 @@
+<div class="col-6 col-md-4">
+    <h5><%= helper.trans("hashtagcms::links.follow_us") %></h5>
+    <div class="flex space-x-3 mt-4">
+        <% 
+            const socialData = data || [];
+            if(Array.isArray(socialData)) {
+                socialData.forEach(function(social) {
+                    let sLabel = social.name.charAt(0).toUpperCase() + social.name.slice(1);
+                    let sCss = social.name.toLowerCase();
+                    let sHref = social.value ? social.value.trim() : '#';
+        %>
+            <a class="w-10 h-10 rounded-lg bg-slate-50 border border-slate-100 flex items-center justify-center text-slate-400 hover:bg-slate-900 hover:text-white hover:border-slate-900 transition-all duration-300" 
+                href="<%= sHref %>" title="<%= sLabel %>" target="_blank" rel="noopener nofollow">
+                <i class="fa fa-<%= sCss %>"></i>
+            </a>
+        <% }); } %>
+    </div>
+</div>
