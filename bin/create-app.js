@@ -330,19 +330,51 @@ HASHTAGCMS_PUBLISH_API=${joinUrl(config.apiBaseUrl, 'api/hashtagcms/public/kpi/v
 HASHTAGCMS_CONTACT_API=${joinUrl(config.apiBaseUrl, 'api/hashtagcms/public/common/v1/contact')}
 HASHTAGCMS_SUBSCRIBE_API=${joinUrl(config.apiBaseUrl, 'api/hashtagcms/public/common/v1/subscribe')}
 
+# Query params forwarded to load-data API (comma-separated)
+HASHTAGCMS_QUERY_PARAMS_TO_LOAD_DATA=limit
+
 # Blog Configuration
 BLOG_PER_PAGE=10
 
-# Cache & Timeout Settings
-HASHTAG_CMS_EXTERNAL_SERVICE_TIMEOUT=20
+# Cache & Timeout Settings (in seconds)
+HASHTAG_CMS_EXTERNAL_SERVICE_TIMEOUT=30
 HASHTAG_CMS_EXTERNAL_CONFIG_CACHE_TTL=60
 HASHTAG_CMS_EXTERNAL_DATA_CACHE_TTL=30
+CACHE_API_SECRET=${config.apiSecret}
+
+# Load-Data Cache TTL (seconds) - only used if Redis is enabled
+LOAD_DATA_CACHE_TTL=300
+
+# Asset Base Path (theme assets will be appended: /assets/hashtagcms/fe/{theme})
+ASSET_BASE_PATH=/assets/hashtagcms/fe
+
+# Optional: Asset URL (if using CDN, leave empty for local)
+ASSET_URL=
+
+# Assets Version (used for cache-busting, update on each deploy)
+ASSETS_VERSION=1
+
+# Admin Panel URL
+ADMIN_BASE_URL=${config.apiBaseUrl}/admin
+
+# Supported Languages (comma-separated, for startup preloading)
+SUPPORTED_LANGUAGES=en,hi,zh
 
 # Session Secret (change this in production!)
 SESSION_SECRET=${Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15)}
+SESSION_MAX_AGE=86400000
 
-# Optional: Asset URL
-ASSET_URL=
+# Optional: Redis Session Store
+# If not configured, will use in-memory sessions (default)
+# Uncomment and configure to enable Redis:
+# REDIS_HOST=localhost
+# REDIS_PORT=6379
+# REDIS_PASSWORD=your_redis_password
+# REDIS_DB=0
+
+# Rate Limiting
+RATE_LIMIT_WINDOW_MS=900000
+RATE_LIMIT_MAX_REQUESTS=1000
 `;
 
     fs.writeFileSync('.env', envContent);
