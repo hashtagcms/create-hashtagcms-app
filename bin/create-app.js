@@ -197,7 +197,7 @@ ${colors.bright}Learn more:${colors.reset}
     info('Creating package.json...');
     const packageJson = {
         name: projectName,
-        version: '2.0.1',
+        version: '2.0.2',
         description: 'The official standalone Node.js frontend application for HashtagCMS.',
         main: 'server.js',
         scripts: {
