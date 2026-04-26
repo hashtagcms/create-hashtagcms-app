@@ -197,7 +197,7 @@ ${colors.bright}Learn more:${colors.reset}
     info('Creating package.json...');
     const packageJson = {
         name: projectName,
-        version: '2.0.0',
+        version: '2.0.1',
         description: 'The official standalone Node.js frontend application for HashtagCMS.',
         main: 'server.js',
         scripts: {
@@ -454,6 +454,29 @@ Check \`.env\` to see your API settings.
     } catch (err) {
         error('Failed to install dependencies');
         warn('You can install them manually by running: npm install');
+    }
+
+    // Check if pre-built assets exist; if not, build them
+    const assetsPath = path.join(projectPath, 'public', 'assets', 'hashtagcms', 'fe');
+    const hasPrebuiltAssets = fs.existsSync(assetsPath) &&
+        fs.readdirSync(assetsPath).some(theme => {
+            const cssFile = path.join(assetsPath, theme, 'css', 'app.css');
+            return fs.existsSync(cssFile) && fs.statSync(cssFile).size > 0;
+        });
+
+    if (!hasPrebuiltAssets) {
+        title('🔨 Building Assets');
+        info('Pre-built assets not found. Running webpack build...');
+        info('This might take a minute...');
+        try {
+            execSync('npm run build', { stdio: 'inherit' });
+            success('Assets built successfully');
+        } catch (err) {
+            error('Failed to build assets');
+            warn('You can build them manually by running: npm run build');
+        }
+    } else {
+        success('Pre-built assets found ✓');
     }
 
     // Success message

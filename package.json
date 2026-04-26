@@ -1,6 +1,6 @@
 {
     "name": "@hashtagcms/create-hashtagcms-app",
-    "version": "2.0.0",
+    "version": "2.0.1",
     "description": "The official standalone Node.js frontend application for HashtagCms.",
     "main": "server.js",
     "bin": {
@@ -9,6 +9,7 @@
     "files": [
         "bin",
         "config",
+        "public",
         "resources",
         "src",
         "server.js",
